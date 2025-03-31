@@ -55,7 +55,9 @@ jobs:
      - name: Login to Azure 
        uses: azure/login@v1
        with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         environment: 'AzureCloud'
         enable-AzPSSession: false
      - name: checkout code
@@ -82,7 +84,9 @@ jobs:
      - name: Set the target AKS cluster.
        uses: Azure/aks-set-context@v1
        with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         cluster-name: ${{ env.CLUSTER_NAME }}
         resource-group: petclinicaks-amrg
      - name: Azure Powershell Cli - Update ACR, Attach ACR to Cluster, Create Service and Expose the Pod
